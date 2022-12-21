@@ -3,8 +3,8 @@ package com.marcot.algamoneyapi.resource;
 import com.marcot.algamoneyapi.model.Categoria;
 import com.marcot.algamoneyapi.repository.CategoriaRepository;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -25,7 +25,7 @@ public class CategoriaResource {
     }
 
     @PostMapping
-    public ResponseEntity<Categoria> criar(@RequestBody Categoria entity, HttpServletResponse response){
+    public ResponseEntity<Categoria> criar(@Valid @RequestBody Categoria entity, HttpServletResponse response){
         Categoria categoriaSalva = categoriaRepository.save(entity);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}")
