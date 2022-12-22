@@ -3,11 +3,14 @@ package com.marcot.algamoneyapi.resource;
 import com.marcot.algamoneyapi.event.RecursoCriadoEvent;
 import com.marcot.algamoneyapi.model.Pessoa;
 import com.marcot.algamoneyapi.repository.PessoaRepository;
+import com.marcot.algamoneyapi.service.PessoaService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +25,8 @@ public class PessoaResource {
 
     @Autowired
     private PessoaRepository pessoaRepository;
+    @Autowired
+    private PessoaService pessoaService;
     @Autowired
     private ApplicationEventPublisher publisher;
 
@@ -47,6 +52,19 @@ public class PessoaResource {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable Long codigo){
         pessoaRepository.deleteById(codigo);
+    }
+
+    @PutMapping("/{codigo}")
+    public ResponseEntity<Pessoa> atualizar(@Valid @PathVariable Long codigo, @Valid @RequestBody Pessoa pessoa) {
+        Pessoa pessoaSalva = pessoaService.atualizar(codigo,pessoa);
+        return ResponseEntity.ok(pessoaSalva);
+    }
+
+
+    @PutMapping("/{codigo}/ativo")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void atualizaPropriedadeAtivo(@Valid @PathVariable Long codigo, @Valid @RequestBody Boolean ativo) {
+        pessoaService.atualizarPropriedadeAtivo(codigo,ativo);
     }
 
 }
