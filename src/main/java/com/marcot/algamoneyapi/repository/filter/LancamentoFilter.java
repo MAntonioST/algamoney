@@ -7,7 +7,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 
 @Data
-@Entity
 public class LancamentoFilter {
     private String descricao;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
