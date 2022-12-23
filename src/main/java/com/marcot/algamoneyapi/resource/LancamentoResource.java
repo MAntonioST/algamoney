@@ -3,8 +3,11 @@ package com.marcot.algamoneyapi.resource;
 import com.marcot.algamoneyapi.event.RecursoCriadoEvent;
 import com.marcot.algamoneyapi.model.Lancamento;
 import com.marcot.algamoneyapi.repository.LancamentoRepository;
+import com.marcot.algamoneyapi.repository.filter.LancamentoFilter;
+import com.marcot.algamoneyapi.service.LancamentoService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+import org.apache.catalina.Store;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
@@ -20,10 +23,12 @@ public class LancamentoResource {
     @Autowired
     private LancamentoRepository lancamentoRepository;
     @Autowired
+    private LancamentoService lancamentoService;
+    @Autowired
     private ApplicationEventPublisher publisher;
 
     @GetMapping
-    public List<Lancamento> listar() {
+    public List<Lancamento> pesquisar(LancamentoFilter lancamentoFilter) {
         return lancamentoRepository.findAll();
     }
 
@@ -36,7 +41,7 @@ public class LancamentoResource {
 
     @PostMapping
     public ResponseEntity<Lancamento> criar(@Valid @RequestBody Lancamento lancamento, HttpServletResponse response) {
-        Lancamento lancamentoSalvo = lancamentoRepository.save(lancamento);
+        Lancamento lancamentoSalvo = lancamentoService.salvar(lancamento);
         publisher.publishEvent(new RecursoCriadoEvent(this, response, lancamentoSalvo.getCodigo()));
         return ResponseEntity.status(HttpStatus.CREATED).body(lancamentoSalvo);
     }

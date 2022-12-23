@@ -1,2 +1,4 @@
-package com.marcot.algamoneyapi.service.exception;public class PessoaInexistenteOuInativaException {
+package com.marcot.algamoneyapi.service.exception;
+
+public class PessoaInexistenteOuInativaException extends RuntimeException{
 }
