@@ -1,7 +1,6 @@
 package com.marcot.algamoneyapi.repository.filter;
 
-import jakarta.persistence.Entity;
-import lombok.*;
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;

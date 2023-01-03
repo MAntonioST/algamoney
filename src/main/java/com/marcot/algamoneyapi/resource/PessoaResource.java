@@ -4,19 +4,14 @@ import com.marcot.algamoneyapi.event.RecursoCriadoEvent;
 import com.marcot.algamoneyapi.model.Pessoa;
 import com.marcot.algamoneyapi.repository.PessoaRepository;
 import com.marcot.algamoneyapi.service.PessoaService;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.validation.Valid;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -31,7 +26,7 @@ public class PessoaResource {
     private ApplicationEventPublisher publisher;
 
     @GetMapping
-    public List<Pessoa> listar(){
+    public List<Pessoa> listar() {
         return pessoaRepository.findAll();
     }
 
@@ -48,15 +43,16 @@ public class PessoaResource {
                 .map(pessoa -> ResponseEntity.ok(pessoa))
                 .orElse(ResponseEntity.notFound().build());
     }
+
     @DeleteMapping("/{codigo}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void remover(@PathVariable Long codigo){
+    public void remover(@PathVariable Long codigo) {
         pessoaRepository.deleteById(codigo);
     }
 
     @PutMapping("/{codigo}")
     public ResponseEntity<Pessoa> atualizar(@Valid @PathVariable Long codigo, @Valid @RequestBody Pessoa pessoa) {
-        Pessoa pessoaSalva = pessoaService.atualizar(codigo,pessoa);
+        Pessoa pessoaSalva = pessoaService.atualizar(codigo, pessoa);
         return ResponseEntity.ok(pessoaSalva);
     }
 
@@ -64,7 +60,7 @@ public class PessoaResource {
     @PutMapping("/{codigo}/ativo")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void atualizaPropriedadeAtivo(@Valid @PathVariable Long codigo, @Valid @RequestBody Boolean ativo) {
-        pessoaService.atualizarPropriedadeAtivo(codigo,ativo);
+        pessoaService.atualizarPropriedadeAtivo(codigo, ativo);
     }
 
 }

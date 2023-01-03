@@ -5,9 +5,6 @@ import com.marcot.algamoneyapi.model.Lancamento;
 import com.marcot.algamoneyapi.repository.LancamentoRepository;
 import com.marcot.algamoneyapi.repository.filter.LancamentoFilter;
 import com.marcot.algamoneyapi.service.LancamentoService;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.validation.Valid;
-import org.apache.catalina.Store;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
@@ -16,7 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/lancamentos")
