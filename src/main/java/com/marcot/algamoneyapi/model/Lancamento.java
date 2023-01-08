@@ -1,8 +1,8 @@
 package com.marcot.algamoneyapi.model;
 
 import com.marcot.algamoneyapi.model.enun.TipoLancamento;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import lombok.*;
 
 import java.math.BigDecimal;

@@ -2,9 +2,9 @@ package com.marcot.algamoneyapi.model;
 
 
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
-import jakarta.validation.constraints.*;
+import javax.validation.constraints.*;
 
 import lombok.*;
 
