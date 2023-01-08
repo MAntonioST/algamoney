@@ -1,4 +1,4 @@
-package com.example.algamoney.api.config;
+package com.marcot.algamoneyapi.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
